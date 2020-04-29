@@ -27,6 +27,16 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("---------walk max depth 1");
+        //Files.walk
+        try(final Stream<Path> walk = Files.walk(path,1)){
+            walk.forEach(System.out::println);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("");
+
 
 
 
