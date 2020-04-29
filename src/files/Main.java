@@ -12,9 +12,17 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) {
 
-        final String url = "C:\\Users\\bushy\\Documents\\Git\\projects\\Java-Files-NIO\\temp";
-        try (Stream<Path> list = Files.list(Path.of(url))){
+        final Path path = Path.of("C:\\Users\\bushy\\Documents\\Git\\projects\\Java-Files-NIO\\temp");
+        try (Stream<Path> list = Files.list(path)){
             list.forEach(System.out::println);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("---------walk-------");
+        //Files.walk
+        try(final Stream<Path> walk = Files.walk(path)){
+            walk.forEach(System.out::println);
         }catch (Exception e){
             e.printStackTrace();
         }
