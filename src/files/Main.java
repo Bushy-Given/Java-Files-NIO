@@ -4,6 +4,8 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 /**
@@ -44,6 +46,24 @@ public class Main {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
+        System.out.println("---------files.find------------");
+
+        BiPredicate<Path, BasicFileAttributes> predicate =
+                (paths, attrs) -> attrs.isDirectory();
+
+        int maxDepth = 2;
+
+        try(final Stream<Path> find = Files.find(path, maxDepth, predicate)){
+            find.forEach(System.out::println);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
 
 
 
