@@ -1,5 +1,6 @@
 package files;
 
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,7 +36,14 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("");
+        System.out.println("---------Visitor Option-----");
+
+        try(final Stream<Path> walk =
+                    Files.walk(path,2, FileVisitOption.FOLLOW_LINKS)){
+            walk.forEach(System.out::println);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 
