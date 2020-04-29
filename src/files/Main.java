@@ -62,8 +62,13 @@ public class Main {
         }
 
 
+        System.out.println("------Files.lines() ---");
 
-
+        try (final Stream<String> lines = Files.lines(Path.of(path + "/Ability.txt"))){
+            lines.forEach(System.out::println);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 
