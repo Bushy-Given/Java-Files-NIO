@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
@@ -82,5 +84,14 @@ public class Main {
                 .sorted()
                 .map(File::getName)
                 .collect(Collectors.toSet());
+    }
+
+    public static Set<Path> listOfPaths(Path path, int maxDepth){
+        try(Stream<Path> find = Files.find(path, maxDepth,  (paths, attrs) -> attrs.isDirectory())){
+            return find.collect(Collectors.toSet());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new HashSet<>();
     }
 }
