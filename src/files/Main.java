@@ -1,11 +1,15 @@
 package files;
 
+import java.io.File;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -70,8 +74,13 @@ public class Main {
             e.printStackTrace();
         }
 
+    }
 
-
-
+    public static Set<String> listFiles(Path dir){
+        return Arrays.stream(dir.toFile().listFiles())
+                .filter(file -> !file.isDirectory())
+                .sorted()
+                .map(File::getName)
+                .collect(Collectors.toSet());
     }
 }
